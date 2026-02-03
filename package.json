@@ -1,7 +1,7 @@
 {
   "name": "explorabot",
   "version": "1.0.0",
-  "description": "Clawdbot-inspired AI assistant deployment bot",
+  "description": "Clawdbot-inspired AI assistant deployment bot with NLP zero-code interface",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -12,7 +12,9 @@
     "bot",
     "ai",
     "assistant",
-    "clawdbot"
+    "clawdbot",
+    "nlp",
+    "zero-code"
   ],
   "author": "",
   "license": "MIT",
@@ -20,6 +22,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "ws": "^8.16.0"
   }
 }
