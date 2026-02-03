@@ -5,6 +5,7 @@ A Clawdbot-inspired AI assistant deployment bot with containerized deployment su
 ## Features
 
 - 🚀 Easy deployment with Docker and Docker Compose
+- 🚂 One-click deployment to Railway
 - 🔄 CI/CD pipeline with GitHub Actions
 - 💚 Health check endpoints
 - 🌐 Web interface for status monitoring
@@ -83,6 +84,42 @@ docker run -d \
   explorabot
 ```
 
+### Railway Deployment
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new?template=https://github.com/NobPolish/EXPLORABOT)
+
+Railway provides one-click deployment with automatic HTTPS and monitoring.
+
+#### Deploy to Railway
+
+1. Click the "Deploy on Railway" button above or visit [Railway](https://railway.app)
+2. Connect your GitHub account
+3. Select this repository
+4. Configure environment variables:
+   - `BOT_NAME` (optional, defaults to EXPLORABOT)
+   - `BOT_PORT` (optional, defaults to 8080)
+   - Add any additional API keys as needed
+5. Deploy!
+
+Railway will automatically:
+- Build the Docker image
+- Deploy to a production environment
+- Provide a public URL with HTTPS
+- Monitor health via the `/health` endpoint
+- Auto-restart on failures
+
+#### Railway Configuration
+
+The repository includes a `railway.json` configuration file that specifies:
+- Docker-based build process
+- Health check endpoint at `/health`
+- Automatic restart policy on failures
+- Start command: `npm start`
+
+#### Updating Your Railway Deployment
+
+Railway automatically redeploys when you push to your connected branch. You can also manually trigger deployments from the Railway dashboard.
+
 ## API Endpoints
 
 - `GET /` - Status page with bot information
@@ -118,6 +155,22 @@ git push origin v1.0.0
 ```
 
 ## Production Deployment
+
+### Railway (Recommended for Quick Deployment)
+
+Railway offers the easiest deployment experience with automatic scaling and built-in monitoring:
+
+1. Click the "Deploy on Railway" button in the README
+2. Connect your GitHub account
+3. Configure environment variables
+4. Your bot will be live with HTTPS in minutes!
+
+Railway provides:
+- Automatic HTTPS certificates
+- Built-in monitoring and logs
+- Easy environment variable management
+- Automatic deployments from GitHub
+- Free tier available
 
 ### On a VPS or Cloud Server
 
