@@ -92,14 +92,19 @@ Railway provides one-click deployment with automatic HTTPS and monitoring.
 
 #### Deploy to Railway
 
-1. Click the "Deploy on Railway" button above or visit [Railway](https://railway.app)
-2. Connect your GitHub account
-3. Select this repository
-4. Configure environment variables:
-   - `PORT` (automatically set by Railway, no need to configure)
-   - `BOT_NAME` (optional, defaults to EXPLORABOT)
-   - Add any additional API keys as needed
-5. Deploy!
+#### Quick Deploy to Railway (Recommended)
+
+1. Click the "Deploy on Railway" button above
+2. Authorize Railway to access your GitHub account
+3. Railway will automatically:
+   - Fork/connect the repository
+   - Detect the Dockerfile
+   - Build and deploy the application
+   - Generate a public HTTPS URL
+   - Set up automatic redeployments on Git push
+4. Once deployed, visit your app URL to see it running!
+
+**Note:** The template button creates a new Railway project linked to this repository. For existing forks or custom configurations, see the manual deployment steps below.
 
 Railway will automatically:
 - Build the Docker image
@@ -110,14 +115,68 @@ Railway will automatically:
 
 #### Railway Configuration
 
-The repository includes a `railway.json` configuration file that specifies:
+The repository includes Railway configuration files that specify:
+- `railway.toml` and `railway.json` - Railway service configuration
+- `Procfile` - Process startup command
+- `Dockerfile` - Container build instructions
 - Docker-based build process
 - Health check endpoint at `/health`
 - Automatic restart policy on failures
 
+#### Manual Railway Deployment Steps
+
+If you prefer to deploy manually instead of using the button:
+
+1. **Sign up/Login to Railway**
+   - Visit [railway.app](https://railway.app) and sign in with your GitHub account
+
+2. **Create a New Project**
+   - Click "New Project" from your Railway dashboard
+   - Select "Deploy from GitHub repo"
+   - Choose the `NobPolish/EXPLORABOT` repository (or your fork)
+
+3. **Configure Environment Variables** (Optional)
+   - Railway automatically sets the `PORT` variable
+   - You can add custom variables like:
+     - `BOT_NAME` - Custom bot name (defaults to EXPLORABOT)
+     - `NODE_ENV` - Set to "production"
+     - Any API keys your bot needs
+
+4. **Deploy**
+   - Railway will automatically detect the Dockerfile and deploy
+   - Your app will be built and deployed in seconds
+   - Railway provides a public URL (e.g., `https://your-app.railway.app`)
+
+5. **Monitor Your Deployment**
+   - View logs in real-time from the Railway dashboard
+   - Check the health endpoint: `https://your-app.railway.app/health`
+   - Monitor resource usage and metrics
+
 #### Updating Your Railway Deployment
 
 Railway automatically redeploys when you push to your connected branch. You can also manually trigger deployments from the Railway dashboard.
+
+#### Railway Deployment Troubleshooting
+
+**Build Fails:**
+- Check the Railway build logs for specific error messages
+- Ensure all dependencies are listed in `package.json`
+- Verify the Dockerfile builds locally: `docker build -t test .`
+
+**App Not Starting:**
+- Check that the PORT environment variable is being used correctly
+- Review application logs in the Railway dashboard
+- Verify the health check endpoint is responding: `/health`
+
+**Can't Access the App:**
+- Ensure your Railway service has a public domain assigned
+- Check that the application is listening on `0.0.0.0` (not just `localhost`)
+- Verify the PORT environment variable is correctly set
+
+**Need Help?**
+- Check Railway's [documentation](https://docs.railway.app/)
+- Visit Railway's [Discord community](https://discord.gg/railway)
+- Review the deployment logs in your Railway dashboard
 
 ## API Endpoints
 
