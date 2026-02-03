@@ -1,6 +1,17 @@
 # EXPLORABOT 🤖
 
-A Clawdbot-inspired AI assistant deployment bot with containerized deployment support.
+A Clawdbot-inspired AI assistant deployment bot with containerized deployment support, optimized for mobile-first platforms like Samsung Galaxy S24 FE.
+
+## 📚 Documentation
+
+**New to EXPLORABOT?** Start with our comprehensive documentation:
+
+- **[Documentation Index](./docs/README.md)** - Complete guide to the project
+- **[Senior AI Architect Persona](./docs/AI_ARCHITECT_PERSONA.md)** - Technical leadership and expertise
+- **[Implementation Standards](./docs/IMPLEMENTATION_STANDARDS.md)** - Coding standards and best practices
+- **[Design Practices Guide](./docs/DESIGN_PRACTICES.md)** - UI/UX design guidelines for mobile
+- **[Code Quality Expectations](./docs/CODE_QUALITY_EXPECTATIONS.md)** - Quality standards and metrics
+- **[Mobile-First Platform Guidelines](./docs/MOBILE_PLATFORM_GUIDELINES.md)** - Samsung Galaxy S24 FE optimization
 
 ## Features
 
@@ -10,6 +21,10 @@ A Clawdbot-inspired AI assistant deployment bot with containerized deployment su
 - 💚 Health check endpoints
 - 🌐 Web interface for status monitoring
 - 🐳 Production-ready containerization
+- 📱 Mobile-first design optimized for Samsung Galaxy S24 FE
+- 🤖 Advanced AI capabilities with on-device optimization
+- ⚡ High-performance architecture for 120Hz displays
+- 🔋 Battery-efficient AI processing
 
 ## Quick Start
 
@@ -202,10 +217,30 @@ Use this endpoint for monitoring and load balancer health checks.
 - `npm run dev` - Start with auto-reload (Node.js 18+)
 - `npm test` - Run tests
 
+## Development Standards
+
+EXPLORABOT follows strict development standards for quality and performance:
+
+- **Code Quality**: 80%+ test coverage, <10 cyclomatic complexity
+- **Performance**: <2s app launch, <100ms API response, 60fps+ rendering
+- **Mobile-First**: Optimized for Samsung Galaxy S24 FE and similar devices
+- **Security**: No hardcoded secrets, input validation, regular audits
+- **Testing**: Comprehensive unit, integration, and E2E tests
+
+See the [Implementation Standards](./docs/IMPLEMENTATION_STANDARDS.md) for complete details.
+
 ## License
 
 MIT
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions are welcome! Before contributing:
+
+1. Read the [Documentation Index](./docs/README.md) to understand the project
+2. Follow [Implementation Standards](./docs/IMPLEMENTATION_STANDARDS.md) for code style
+3. Ensure [Code Quality Expectations](./docs/CODE_QUALITY_EXPECTATIONS.md) are met
+4. Apply [Design Practices](./docs/DESIGN_PRACTICES.md) for UI changes
+5. Optimize per [Mobile-First Platform Guidelines](./docs/MOBILE_PLATFORM_GUIDELINES.md)
+
+Please open an issue or submit a pull request.
