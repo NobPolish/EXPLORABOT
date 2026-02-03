@@ -1,12 +1,30 @@
 # EXPLORABOT 🤖
 
-A Clawdbot-inspired AI assistant deployment bot with containerized deployment support, optimized for mobile-first platforms like Samsung Galaxy S24 FE.
+A Clawdbot-inspired AI assistant deployment bot with **natural language processing (NLP)** and **zero-code interface**, optimized for mobile-first platforms like Samsung Galaxy S24 FE.
+
+## ✨ New: NLP-Powered Zero-Code Interface
+
+**Talk to your bot in plain English!** No coding required.
+
+```
+💬 "Help me deploy with Docker"
+🤖 Shows Docker commands and setup instructions
+
+💬 "Create a REST API"
+🤖 Provides code generation guidance
+
+💬 "Mobile optimization tips"
+🤖 Samsung Galaxy S24 FE best practices
+```
+
+**[📖 NLP Zero-Code Guide](./docs/NLP_ZERO_CODE_GUIDE.md)** - Learn how to use natural language commands
 
 ## 📚 Documentation
 
 **New to EXPLORABOT?** Start with our comprehensive documentation:
 
 - **[Documentation Index](./docs/README.md)** - Complete guide to the project
+- **[NLP Zero-Code Guide](./docs/NLP_ZERO_CODE_GUIDE.md)** - Natural language interface usage ⭐ NEW
 - **[Senior AI Architect Persona](./docs/AI_ARCHITECT_PERSONA.md)** - Technical leadership and expertise
 - **[Implementation Standards](./docs/IMPLEMENTATION_STANDARDS.md)** - Coding standards and best practices
 - **[Design Practices Guide](./docs/DESIGN_PRACTICES.md)** - UI/UX design guidelines for mobile
@@ -15,16 +33,22 @@ A Clawdbot-inspired AI assistant deployment bot with containerized deployment su
 
 ## Features
 
+### Core Features
 - 🚀 Easy deployment with Docker and Docker Compose
 - 🚂 One-click deployment to Railway
 - 🔄 CI/CD pipeline with GitHub Actions
 - 💚 Health check endpoints
-- 🌐 Web interface for status monitoring
 - 🐳 Production-ready containerization
-- 📱 Mobile-first design optimized for Samsung Galaxy S24 FE
-- 🤖 Advanced AI capabilities with on-device optimization
-- ⚡ High-performance architecture for 120Hz displays
-- 🔋 Battery-efficient AI processing
+
+### New: Intelligent Features
+- 💬 **Natural Language Processing (NLP)** - Talk in plain English
+- 🎯 **Zero-Code Interface** - No programming knowledge needed
+- 🤖 **Intent Recognition** - AI understands your goals
+- ⚡ **Quick Actions** - One-click common tasks
+- 🌐 **Modern Chat UI** - Sleek, responsive interface
+- 📱 **Mobile-First Design** - Optimized for Samsung Galaxy S24 FE
+- 🧠 **Context-Aware Responses** - Intelligent conversation flow
+- 🔋 **Battery-Efficient** - Optimized AI processing
 
 ## Quick Start
 
@@ -58,6 +82,50 @@ npm start
 ```
 
 The bot will be available at `http://localhost:8080`
+
+### Using the NLP Interface
+
+Once the bot is running, you can interact with it in multiple ways:
+
+#### 1. Web Chat Interface (Recommended)
+
+Open your browser and navigate to `http://localhost:8080`:
+
+- Type natural language commands in the chat box
+- Use quick action buttons for common tasks
+- Get instant AI-powered responses
+
+**Example commands:**
+```
+"Help me deploy an app"
+"Create a REST API"
+"Show me Docker commands"
+"Mobile optimization tips"
+```
+
+#### 2. REST API
+
+Send POST requests to `/api/chat`:
+
+```bash
+curl -X POST http://localhost:8080/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message":"help with docker"}'
+```
+
+#### 3. Programmatic Integration
+
+```javascript
+const response = await fetch('http://localhost:8080/api/chat', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ message: 'create a mobile app' })
+});
+const data = await response.json();
+console.log(data.response);
+```
+
+See the **[NLP Zero-Code Guide](./docs/NLP_ZERO_CODE_GUIDE.md)** for more examples.
 
 ### Docker Deployment
 
