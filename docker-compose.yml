@@ -9,10 +9,9 @@ services:
       - "${BOT_PORT:-8080}:8080"
     environment:
       - NODE_ENV=production
-      - BOT_NAME=${BOT_NAME:-EXPLORABOT}
       - BOT_PORT=8080
     env_file:
-      - .env
+      - .env  # .env variables override environment defaults above
     volumes:
       - ./logs:/app/logs
     networks:
