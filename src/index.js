@@ -1,7 +1,8 @@
 require('dotenv').config();
 
 const BOT_NAME = process.env.BOT_NAME || 'EXPLORABOT';
-const BOT_PORT = process.env.BOT_PORT || 8080;
+// Railway provides PORT, fallback to BOT_PORT, then 8080
+const BOT_PORT = process.env.PORT || process.env.BOT_PORT || 8080;
 
 console.log(`🤖 ${BOT_NAME} - AI Assistant Bot`);
 console.log(`📦 Version: ${require('../package.json').version}`);

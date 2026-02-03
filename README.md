@@ -96,8 +96,8 @@ Railway provides one-click deployment with automatic HTTPS and monitoring.
 2. Connect your GitHub account
 3. Select this repository
 4. Configure environment variables:
+   - `PORT` (automatically set by Railway, no need to configure)
    - `BOT_NAME` (optional, defaults to EXPLORABOT)
-   - `BOT_PORT` (optional, defaults to 8080)
    - Add any additional API keys as needed
 5. Deploy!
 
@@ -130,9 +130,11 @@ Edit the `.env` file to configure the bot:
 
 ```env
 BOT_NAME=EXPLORABOT
-BOT_PORT=8080
+BOT_PORT=8080  # For local development (Railway uses PORT automatically)
 NODE_ENV=production
 ```
+
+**Note for Railway:** Railway automatically sets the `PORT` environment variable. The application will prioritize `PORT` over `BOT_PORT`, so you don't need to configure it when deploying to Railway.
 
 ## GitHub Actions
 
