@@ -38,6 +38,20 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify({ error: 'Invalid request' }));
       }
     });
+  } else if (req.url === '/demo') {
+    // Serve the demo page
+    const fs = require('fs');
+    const path = require('path');
+    const demoPath = path.join(__dirname, '..', 'demo.html');
+    fs.readFile(demoPath, 'utf8', (err, data) => {
+      if (err) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Demo page not found');
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data);
+      }
+    });
   } else if (req.url === '/') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
     res.end(getChatUI());

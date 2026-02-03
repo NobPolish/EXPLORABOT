@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EXPLORABOT - NLP Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #000;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 32px;
+    }
+
+    .demo-section {
+      background: #1e1e1e;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    .demo-section h2 {
+      color: #00d9ff;
+      margin-bottom: 16px;
+      font-size: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 12px 16px;
+      background: #121212;
+      border: 2px solid #333;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #0066cc;
+    }
+
+    button {
+      padding: 12px 24px;
+      background: #0066cc;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background: #0052a3;
+      transform: translateY(-2px);
+    }
+
+    .quick-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .quick-btn {
+      padding: 8px 16px;
+      background: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 20px;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .quick-btn:hover {
+      background: #0066cc;
+      border-color: #0066cc;
+    }
+
+    .response {
+      background: #121212;
+      border-radius: 8px;
+      padding: 16px;
+      min-height: 100px;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      border: 1px solid #333;
+    }
+
+    .loading {
+      text-align: center;
+      color: #00d9ff;
+      padding: 20px;
+    }
+
+    .example {
+      background: #2a2a2a;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 8px 0;
+      font-family: 'Monaco', monospace;
+      font-size: 14px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #28a745;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 EXPLORABOT NLP Demo</h1>
+    
+    <div style="text-align: center; margin-bottom: 30px;">
+      <span class="status">✓ API Online</span>
+    </div>
+
+    <div class="demo-section">
+      <h2>Try Natural Language Commands</h2>
+      
+      <div class="quick-buttons">
+        <button class="quick-btn" onclick="sendMessage('help')">💡 Help</button>
+        <button class="quick-btn" onclick="sendMessage('deploy with docker')">🐳 Docker</button>
+        <button class="quick-btn" onclick="sendMessage('create a REST API')">⚡ Create API</button>
+        <button class="quick-btn" onclick="sendMessage('mobile optimization')">📱 Mobile Tips</button>
+        <button class="quick-btn" onclick="sendMessage('what is your status')">📊 Status</button>
+      </div>
+
+      <div class="input-group">
+        <input 
+          type="text" 
+          id="messageInput" 
+          placeholder="Type your natural language command..."
+          onkeypress="if(event.key==='Enter') sendMessage()"
+        />
+        <button onclick="sendMessage()">Send</button>
+      </div>
+
+      <div class="response" id="response">
+        👋 Welcome! I'm EXPLORABOT, your AI assistant.<br><br>
+        Try asking me something in plain English!<br>
+        Examples: "help", "deploy with docker", "create a mobile app"
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>Example Commands</h2>
+      
+      <div class="example">
+        💬 "Help me deploy an application"<br>
+        🤖 Shows deployment options and guidance
+      </div>
+
+      <div class="example">
+        💬 "Create a REST API with authentication"<br>
+        🤖 Provides code generation templates
+      </div>
+
+      <div class="example">
+        💬 "Samsung Galaxy S24 FE optimization tips"<br>
+        🤖 Mobile-first best practices
+      </div>
+
+      <div class="example">
+        💬 "Show me Docker commands"<br>
+        🤖 Docker setup and configuration
+      </div>
+    </div>
+
+    <div class="demo-section">
+      <h2>API Usage</h2>
+      <div class="example">
+curl -X POST http://localhost:8080/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message":"help with docker"}'
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage(text) {
+      const input = document.getElementById('messageInput');
+      const responseDiv = document.getElementById('response');
+      
+      const message = text || input.value.trim();
+      if (!message) return;
+      
+      // Clear input
+      input.value = '';
+      
+      // Show loading
+      responseDiv.innerHTML = '<div class="loading">🤖 Processing your request...</div>';
+      
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message }),
+        });
+        
+        const data = await response.json();
+        
+        // Format the response
+        let formatted = data.response
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/`(.+?)`/g, '<code style="background:#2a2a2a;padding:2px 6px;border-radius:4px;">$1</code>')
+          .replace(/\n/g, '<br>');
+        
+        responseDiv.innerHTML = formatted;
+      } catch (error) {
+        responseDiv.innerHTML = `<div style="color:#dc3545;">Error: ${error.message}</div>`;
+      }
+    }
+  </script>
+</body>
+</html>
