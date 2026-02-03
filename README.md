@@ -114,7 +114,6 @@ The repository includes a `railway.json` configuration file that specifies:
 - Docker-based build process
 - Health check endpoint at `/health`
 - Automatic restart policy on failures
-- Start command: `npm start`
 
 #### Updating Your Railway Deployment
 
