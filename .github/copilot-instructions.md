@@ -62,10 +62,11 @@ docker-compose logs -f # View logs
 ## Development Standards
 
 ### Code Quality
-- Maintain 80%+ test coverage
 - Keep cyclomatic complexity under 10
 - Follow existing code style and patterns
 - Write clear, maintainable code with minimal comments
+- Test changes manually when test infrastructure is not yet established
+- Target 80%+ test coverage when test framework is implemented
 
 ### Performance Requirements
 - App launch time: < 2 seconds
@@ -122,10 +123,17 @@ When adding new endpoints, ensure they:
 
 ## Testing Guidelines
 
+**Note**: This project does not yet have a formal test framework. Current testing approach:
+- Manually test all changes locally using `npm start`
+- Test with Docker using `docker-compose up`
+- Verify endpoints using curl or browser
+- Check logs for errors and warnings
+
+When implementing a test framework:
 - Write tests for all new features
-- Ensure tests are consistent with existing test structure
-- Run tests before committing: `npm test`
-- Test on both local and Docker environments when possible
+- Ensure tests are consistent with existing project structure
+- Choose an appropriate framework (e.g., Jest, Mocha)
+- Aim for 80%+ test coverage
 
 ## Environment Configuration
 
