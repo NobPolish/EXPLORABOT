@@ -1498,11 +1498,21 @@ function getChatUI() {
       }
     }
 
+    // Escape HTML to prevent XSS attacks
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
     // Format message with markdown-like syntax
     function formatMessage(text) {
       if (!text || typeof text !== 'string') return '';
       
       try {
+        // First escape HTML to prevent XSS
+        text = escapeHtml(text);
+        
         // Convert code blocks
         text = text.replace(/\\\`\\\`\\\`([\\s\\S]*?)\\\`\\\`\\\`/g, '<pre><code>$1</code></pre>');
         // Convert inline code
@@ -1517,7 +1527,7 @@ function getChatUI() {
         return text;
       } catch (error) {
         log.error('Failed to format message:', error);
-        return text;
+        return escapeHtml(text);
       }
     }
 
