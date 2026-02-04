@@ -14,10 +14,24 @@ console.log(`🚀 Starting bot on port ${BOT_PORT}...`);
 // Initialize NLP processor
 const nlp = new NLPProcessor();
 
+// CORS headers for cross-origin requests (needed for Railway and other cloud platforms)
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
 // HTTP server with chat UI
 const server = http.createServer((req, res) => {
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    res.writeHead(204, corsHeaders);
+    res.end();
+    return;
+  }
+
   if (req.url === '/health') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.writeHead(200, { 'Content-Type': 'application/json', ...corsHeaders });
     res.end(JSON.stringify({ 
       status: 'healthy', 
       bot: BOT_NAME,
@@ -31,10 +45,10 @@ const server = http.createServer((req, res) => {
       try {
         const { message } = JSON.parse(body);
         const response = nlp.process(message);
-        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.writeHead(200, { 'Content-Type': 'application/json', ...corsHeaders });
         res.end(JSON.stringify({ response }));
       } catch (error) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.writeHead(400, { 'Content-Type': 'application/json', ...corsHeaders });
         res.end(JSON.stringify({ error: 'Invalid request' }));
       }
     });
@@ -102,8 +116,12 @@ wss.on('connection', (ws) => {
   });
 });
 
-server.listen(BOT_PORT, () => {
-  console.log(`✅ Bot server is running on http://localhost:${BOT_PORT}`);
+// Bind to 0.0.0.0 to accept connections from all network interfaces
+// This is required for Railway and other container platforms
+const HOST = '0.0.0.0';
+
+server.listen(BOT_PORT, HOST, () => {
+  console.log(`✅ Bot server is running on port ${BOT_PORT} (accepting connections on all interfaces)`);
   console.log(`📡 Health check: http://localhost:${BOT_PORT}/health`);
   console.log(`💬 Chat interface: http://localhost:${BOT_PORT}/`);
 });
