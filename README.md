@@ -57,7 +57,29 @@ A Clawdbot-inspired AI assistant deployment bot with **natural language processi
 - Node.js 18+ (for local development)
 - Docker and Docker Compose (for containerized deployment)
 
-### Local Development
+### Automated Setup (Recommended) ⚡
+
+The fastest way to get started! Run the automated setup script:
+
+```bash
+# Clone the repository
+git clone https://github.com/NobPolish/EXPLORABOT.git
+cd EXPLORABOT
+
+# Run the setup script (local mode)
+./setup.sh local
+```
+
+Or with Docker:
+```bash
+./setup.sh docker
+```
+
+That's it! The bot will be available at `http://localhost:8080`
+
+Run `./setup.sh help` for all available options.
+
+### Manual Local Development
 
 1. Clone the repository:
 ```bash
